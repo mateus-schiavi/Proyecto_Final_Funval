@@ -1,44 +1,87 @@
+let tareas = [];
 
+const element = document.querySelector("#tarea");
+element.addEventListener("submit", addTask);
 
-/* Los siguientes nombres de funciones son una sugerencia de funciones que necesitarás en tu programa,
-sin embargo, no te limites solo a estas funciones. Crea tantas como consideres necesarias.
+const listaTareas = document.querySelector("#listaTareas");
+const borrarTodo = document.querySelector("#borrarTodo");
 
-La estructura de cada objeto "tarea" es la siguiente:
+const Todo = document.querySelector("#All");
+const Activo = document.querySelector("#Active");
+const Completo = document.querySelector("#Completed");
 
-{
-  id: 1,
-  title: "tarea",
-  completed: false
+Todo.addEventListener("click", () => filterTasks(2));
+Activo.addEventListener("click", () => filterTasks(0));
+Completo.addEventListener("click", () => filterTasks(1));
+
+function addTask(event) {
+  event.preventDefault();
+
+  const textoTarea = document.querySelector("#textTask").value;
+
+  const task = {
+    textoTarea,
+    completado: false,
+    id: new Date().getTime()
+  };
+
+  tareas.push(task);
+  document.getElementById('tarea').reset();
+  generateLista();
 }
 
-*/
-
-// Función para añadir una nueva tarea
-function addTask() {
-
+function generateLista(filteredTasks = tareas) {
+  listaTareas.innerHTML = "";
+  filteredTasks.forEach(task => listaTareas.innerHTML += createItem(task));
 }
 
-// Función para marcar una tarea como completada o imcompleta (Puede ser la misma función)
-function completeTask() {
-
+function createItem(task) {
+  return `
+      <li class="list-group-item eList ${task.completado ? 'marked' : ''}">
+       <input class="form-check-input checkMark" type="checkbox" 
+         onChange="completeTask(${task.id})" ${task.completado ? 'checked' : ''}>
+        ${task.textoTarea}
+        ${task.completado ? `<button class="caneca" onClick="deleteTask(${task.id})">
+         <i class="fa-regular fa-trash-can"></i></button>` : ''}
+     </li>
+   `;
 }
 
-// Función para borrar una tarea
-function deleteTask() {
-
+function completeTask(id) {
+  const taskIndex = tareas.findIndex(tarea => id === tarea.id);
+  tareas[taskIndex].completado = !tareas[taskIndex].completado;
+  generateLista();
 }
 
-// Funcion para borrar todas las tareas
+function filterTasks(filterType) {
+  let filteredTasks = [];
+
+  if (filterType === 0) {
+    filteredTasks = tareas.filter(task => !task.completado);
+  } else if (filterType === 1) {
+    filteredTasks = tareas.filter(task => task.completado);
+  } else {
+    filteredTasks = tareas;
+
+  }
+
+  
+  generateLista(filteredTasks);
+  borrarTodo.classList.toggle("desaparece", filterType !== 1);
+  Todo.classList.toggle("active", filterType === 2);
+  Activo.classList.toggle("active", filterType === 0);
+  Completo.classList.toggle("active", filterType === 1);
+}
+
+function deleteTask(id) {
+  tareas = tareas.filter(task => task.id !== id);
+  generateLista();
+}
+
+const deleteTodo = document.querySelector("#borrarTodo");
+deleteTodo.addEventListener("click", deleteAll);
+
 function deleteAll() {
-
-}
-
-// Función para filtrar tareas completadas
-function filterCompleted() {
-
-}
-
-// Función para filtrar tareas incompletas
-function filterUncompleted() {
-
+  tareas = tareas.filter(task => !task.completado);
+  generateLista();
 }

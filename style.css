@@ -1,0 +1,162 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+h1 {
+    font-weight: 800;
+    margin-top: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+
+/*fin reglas generales*/
+
+/* reglas css selectores incluir aca los efectos display none */
+.selectors {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto;
+
+    width: 80%;
+
+
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    border-bottom: solid rgb(207, 201, 201) 2px;
+
+
+}
+
+.Todo {
+    padding: 5px 70px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    background-color: white;
+    border: none;
+
+}
+
+.Activo {
+    padding: 5px 30px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    background-color: white;
+    border: none;
+}
+
+.Completo {
+    padding: 5px 20px 5px 20px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    background-color: white;
+    border: none;
+}
+
+.desaparece {
+    display: none;
+}
+
+/*fin reglas de los selectores*/
+
+.form-container {
+
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 0px 5rem;
+    margin-bottom: 10px;
+
+}
+
+.formulario {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+
+}
+
+.texto-form {
+    flex-grow: 1;
+    width: 80%;
+    height: 100%;
+}
+
+.boton {
+    margin-left: 1rem;
+    padding: 13px 30px;
+
+}
+
+.active {
+    border-bottom: solid rgb(147, 147, 245) 3px;
+}
+
+/*Inicio lista*/
+
+.listContainer {
+    display: flex;
+    padding: 0px 5rem;
+
+}
+
+.listaT {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 400;
+    width: 100%;
+    padding: 0;
+}
+
+.checkMark {
+    padding: 10px;
+    margin-right: 5px;
+}
+
+.eList {
+    align-items: baseline;
+    display: flex;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+
+
+}
+
+.marked {
+    text-decoration-line: line-through
+}
+
+.caneca {
+    margin-left: auto;
+    background-color: white;
+    border: none;
+    color: rgb(202, 190, 190);
+
+}
+
+/*fnal lista*/
+/*boton borarr*/
+
+.borrarTodo {
+    padding: 0px 5rem;
+
+
+    display: flex;
+
+}
+
+#borrarTodo {
+    margin-left: auto;
+    padding: 1rem 2.5rem;
+    font-size: 0.7rem;
+}

@@ -19,6 +19,10 @@ function addTask(event) {
 
   const textoTarea = document.querySelector("#textTask").value;
 
+  if(textoTarea.trim() === ""){
+    alert("¡Por favor, añade un texto para la tarea!");
+    return;
+  }
   const task = {
     textoTarea,
     completado: false,
@@ -60,12 +64,13 @@ function filterTasks(filterType) {
     filteredTasks = tareas.filter(task => !task.completado);
   } else if (filterType === 1) {
     filteredTasks = tareas.filter(task => task.completado);
+    
   } else {
     filteredTasks = tareas;
 
   }
 
-  
+
   generateLista(filteredTasks);
   borrarTodo.classList.toggle("desaparece", filterType !== 1);
   Todo.classList.toggle("active", filterType === 2);

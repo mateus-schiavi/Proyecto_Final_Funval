@@ -1,22 +1,22 @@
 let tareas = [];
 
-const element = document.querySelector("#tarea");
+const element = document.querySelector("#task");
 element.addEventListener("submit", addTask);
 
-const listaTareas = document.querySelector("#listaTareas");
-const borrarTodo = document.querySelector("#borrarTodo");
+const listaTareas = document.querySelector("#taskList");
+const borrarTodo = document.querySelector("#deleteAll");
 
-const Todo = document.querySelector("#All");
-const Activo = document.querySelector("#Active");
-const Completo = document.querySelector("#Completed");
+const All = document.querySelector("#All");
+const Active = document.querySelector("#Active");
+const Completed = document.querySelector("#Completed");
 
-Todo.addEventListener("click", () => filterTasks(2));
-Activo.addEventListener("click", () => filterTasks(0));
-Completo.addEventListener("click", () => filterTasks(1));
+All.addEventListener("click", () => filterTasks(2));
+Active.addEventListener("click", () => filterTasks(0));
+Completed.addEventListener("click", () => filterTasks(1));
 
 // Variáveis para o botão "Add" e a caixa de diálogo
 const addButton = document.querySelector(".boton");
-const taskInput = document.querySelector(".texto-form");
+const taskInput = document.querySelector(".form-control-text-form");
 
 function addTask(event) {
   event.preventDefault();
@@ -90,7 +90,7 @@ function deleteTask(id) {
   generateLista();
 }
 
-const deleteTodo = document.querySelector("#borrarTodo");
+const deleteTodo = document.querySelector("#deleteAll");
 deleteTodo.addEventListener("click", deleteAll);
 
 function deleteAll() {

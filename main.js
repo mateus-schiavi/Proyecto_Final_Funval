@@ -14,12 +14,16 @@ Todo.addEventListener("click", () => filterTasks(2));
 Activo.addEventListener("click", () => filterTasks(0));
 Completo.addEventListener("click", () => filterTasks(1));
 
+// Variáveis para o botão "Add" e a caixa de diálogo
+const addButton = document.querySelector(".boton");
+const taskInput = document.querySelector(".texto-form");
+
 function addTask(event) {
   event.preventDefault();
 
-  const textoTarea = document.querySelector("#textTask").value;
+  const textoTarea = taskInput.value;
 
-  if(textoTarea.trim() === ""){
+  if (textoTarea.trim() === "") {
     alert("¡Por favor, añade un texto para la tarea!");
     return;
   }
@@ -30,7 +34,7 @@ function addTask(event) {
   };
 
   tareas.push(task);
-  document.getElementById('tarea').reset();
+  taskInput.value = ""; // Alteração aqui para limpar o valor do input
   generateLista();
 }
 
@@ -41,14 +45,14 @@ function generateLista(filteredTasks = tareas) {
 
 function createItem(task) {
   return `
-      <li class="list-group-item eList ${task.completado ? 'marked' : ''}">
-       <input class="form-check-input checkMark" type="checkbox" 
-         onChange="completeTask(${task.id})" ${task.completado ? 'checked' : ''}>
-        ${task.textoTarea}
-        ${task.completado ? `<button class="caneca" onClick="deleteTask(${task.id})">
-         <i class="fa-regular fa-trash-can"></i></button>` : ''}
-     </li>
-   `;
+    <li class="list-group-item eList ${task.completado ? 'marked' : ''}">
+      <input class="form-check-input checkMark" type="checkbox" 
+        onChange="completeTask(${task.id})" ${task.completado ? 'checked' : ''}>
+      ${task.textoTarea}
+      ${task.completado ? `<button class="caneca" onClick="deleteTask(${task.id})">
+        <i class="fa-regular fa-trash-can"></i></button>` : ''}
+    </li>
+  `;
 }
 
 function completeTask(id) {
@@ -62,14 +66,17 @@ function filterTasks(filterType) {
 
   if (filterType === 0) {
     filteredTasks = tareas.filter(task => !task.completado);
+    addButton.style.display = 'block'; // Mostrar o botão "Add"
+    taskInput.style.display = 'block'; // Mostrar a caixa de diálogo
   } else if (filterType === 1) {
     filteredTasks = tareas.filter(task => task.completado);
-    
+    addButton.style.display = 'none'; // Ocultar o botão "Add"
+    taskInput.style.display = 'none'; // Ocultar a caixa de diálogo
   } else {
     filteredTasks = tareas;
-
+    addButton.style.display = 'block'; // Mostrar o botão "Add"
+    taskInput.style.display = 'block'; // Mostrar a caixa de diálogo
   }
-
 
   generateLista(filteredTasks);
   borrarTodo.classList.toggle("desaparece", filterType !== 1);

@@ -43,17 +43,22 @@ function generateLista(filteredTasks = tareas) {
   filteredTasks.forEach(task => listaTareas.innerHTML += createItem(task));
 }
 
-function createItem(task) {
+function createItem(task, filterType) {
+  const showDeleteIcon = filterType === 1 && task.completado; // Show delete icon only in Completed filter
+
   return `
     <li class="list-group-item eList ${task.completado ? 'marked' : ''}">
       <input class="form-check-input checkMark" type="checkbox" 
         onChange="completeTask(${task.id})" ${task.completado ? 'checked' : ''}>
       ${task.textoTarea}
-      ${task.completado ? `<button class="caneca" onClick="deleteTask(${task.id})">
+      ${showDeleteIcon ? `<button class="caneca" onClick="deleteTask(${task.id})">
         <i class="fa-regular fa-trash-can"></i></button>` : ''}
     </li>
   `;
 }
+
+
+
 
 function completeTask(id) {
   const taskIndex = tareas.findIndex(tarea => id === tarea.id);

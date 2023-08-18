@@ -82,16 +82,16 @@ function filterTasks(filterType) {
 
   if (filterType === 0) {
     filteredTasks = tareas.filter(task => !task.completado);
-    addButton.style.display = 'block'; // Mostrar o botão "Add"
-    taskInput.style.display = 'block'; // Mostrar a caixa de diálogo
+    addButton.style.display = 'block'; 
+    taskInput.style.display = 'block'; 
   } else if (filterType === 1) {
     filteredTasks = tareas.filter(task => task.completado);
-    addButton.style.display = 'none'; // Ocultar o botão "Add"
-    taskInput.style.display = 'none'; // Ocultar a caixa de diálogo
+    addButton.style.display = 'none'; 
+    taskInput.style.display = 'none'; 
   } else {
     filteredTasks = tareas;
-    addButton.style.display = 'block'; // Mostrar o botão "Add"
-    taskInput.style.display = 'block'; // Mostrar a caixa de diálogo
+    addButton.style.display = 'block'; 
+    taskInput.style.display = 'block'; 
   }
 
   generateLista(filteredTasks);

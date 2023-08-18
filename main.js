@@ -2,7 +2,7 @@ let tareas = [];
 
 if (localStorage.getItem("tasks")) {
   tareas = JSON.parse(localStorage.getItem("tasks"));
-  
+
 }
 
 const element = document.querySelector("#tarea");
@@ -44,7 +44,7 @@ function addTask(event) {
 
   tareas.push(task);
   saveTasksToLocalStorage();
-  taskInput.value = ""; 
+  taskInput.value = "";
   generateLista();
 }
 
@@ -82,16 +82,16 @@ function filterTasks(filterType) {
 
   if (filterType === 0) {
     filteredTasks = tareas.filter(task => !task.completado);
-    addButton.style.display = 'block'; 
-    taskInput.style.display = 'block'; 
+    addButton.style.display = 'block';
+    taskInput.style.display = 'block';
   } else if (filterType === 1) {
     filteredTasks = tareas.filter(task => task.completado);
-    addButton.style.display = 'none'; 
-    taskInput.style.display = 'none'; 
+    addButton.style.display = 'none';
+    taskInput.style.display = 'none';
   } else {
     filteredTasks = tareas;
-    addButton.style.display = 'block'; 
-    taskInput.style.display = 'block'; 
+    addButton.style.display = 'block';
+    taskInput.style.display = 'block';
   }
 
   generateLista(filteredTasks);

@@ -1,5 +1,10 @@
 let tareas = [];
 
+if (localStorage.getItem("tasks")) {
+  tareas = JSON.parse(localStorage.getItem("tasks"));
+  
+}
+
 const element = document.querySelector("#tarea");
 element.addEventListener("submit", addTask);
 
@@ -18,6 +23,10 @@ Completo.addEventListener("click", () => filterTasks(1));
 const addButton = document.querySelector(".boton");
 const taskInput = document.querySelector(".texto-form");
 
+function saveTasksToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tareas));
+}
+
 function addTask(event) {
   event.preventDefault();
 
@@ -34,7 +43,8 @@ function addTask(event) {
   };
 
   tareas.push(task);
-  taskInput.value = ""; // Alteração aqui para limpar o valor do input
+  saveTasksToLocalStorage();
+  taskInput.value = ""; 
   generateLista();
 }
 
@@ -63,6 +73,7 @@ function createItem(task, filterType) {
 function completeTask(id) {
   const taskIndex = tareas.findIndex(tarea => id === tarea.id);
   tareas[taskIndex].completado = !tareas[taskIndex].completado;
+  saveTasksToLocalStorage();
   generateLista();
 }
 
@@ -92,6 +103,7 @@ function filterTasks(filterType) {
 
 function deleteTask(id) {
   tareas = tareas.filter(task => task.id !== id);
+  saveTasksToLocalStorage();
   generateLista();
 }
 
@@ -100,5 +112,6 @@ deleteTodo.addEventListener("click", deleteAll);
 
 function deleteAll() {
   tareas = tareas.filter(task => !task.completado);
+  saveTasksToLocalStorage();
   generateLista();
 }

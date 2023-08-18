@@ -1,9 +1,5 @@
 let tareas = [];
 
-if (localStorage.getItem("tasks")) {
-  tareas = JSON.parse(localStorage.getItem("tasks"));
-
-}
 
 const element = document.querySelector("#tarea");
 element.addEventListener("submit", addTask);
@@ -23,9 +19,7 @@ Completo.addEventListener("click", () => filterTasks(1));
 const addButton = document.querySelector(".boton");
 const taskInput = document.querySelector(".texto-form");
 
-function saveTasksToLocalStorage() {
-  localStorage.setItem("tasks", JSON.stringify(tareas));
-}
+
 
 function addTask(event) {
   event.preventDefault();
@@ -43,7 +37,6 @@ function addTask(event) {
   };
 
   tareas.push(task);
-  saveTasksToLocalStorage();
   taskInput.value = "";
   generateLista();
 }
@@ -54,7 +47,7 @@ function generateLista(filteredTasks = tareas) {
 }
 
 function createItem(task, filterType) {
-  const showDeleteIcon = filterType === 1 && task.completado;
+  const showDeleteIcon = filterType === 1 && task.completado; // Show delete icon only in Completed filter
 
   return `
     <li class="list-group-item eList ${task.completado ? 'marked' : ''}">
@@ -73,7 +66,6 @@ function createItem(task, filterType) {
 function completeTask(id) {
   const taskIndex = tareas.findIndex(tarea => id === tarea.id);
   tareas[taskIndex].completado = !tareas[taskIndex].completado;
-  saveTasksToLocalStorage();
   generateLista();
 }
 
@@ -103,7 +95,6 @@ function filterTasks(filterType) {
 
 function deleteTask(id) {
   tareas = tareas.filter(task => task.id !== id);
-  saveTasksToLocalStorage();
   generateLista();
 }
 
@@ -112,6 +103,5 @@ deleteTodo.addEventListener("click", deleteAll);
 
 function deleteAll() {
   tareas = tareas.filter(task => !task.completado);
-  saveTasksToLocalStorage();
   generateLista();
 }

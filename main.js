@@ -19,7 +19,7 @@ Todo.addEventListener("click", () => filterTasks(2));
 Activo.addEventListener("click", () => filterTasks(0));
 Completo.addEventListener("click", () => filterTasks(1));
 
-// Variáveis para o botão "Add" e a caixa de diálogo
+
 const addButton = document.querySelector(".boton");
 const taskInput = document.querySelector(".texto-form");
 
@@ -54,7 +54,7 @@ function generateLista(filteredTasks = tareas) {
 }
 
 function createItem(task, filterType) {
-  const showDeleteIcon = filterType === 1 && task.completado; // Show delete icon only in Completed filter
+  const showDeleteIcon = filterType === 1 && task.completado;
 
   return `
     <li class="list-group-item eList ${task.completado ? 'marked' : ''}">

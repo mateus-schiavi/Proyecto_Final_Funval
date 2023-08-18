@@ -33,7 +33,7 @@ function addTask(event) {
   const textoTarea = taskInput.value;
 
   if (textoTarea.trim() === "") {
-    alert("¡Por favor, añade un texto para la tarea!");
+    alert("¡La tarea no puede estar vacía. Por favor, añade un texto para la tarea!");
     return;
   }
   const task = {
